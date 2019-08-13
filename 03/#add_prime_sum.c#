@@ -1,0 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_prime_sum.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kcorie <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/12 22:25:14 by kcorie            #+#    #+#             */
+/*   Updated: 2019/08/12 22:26:37 by kcorie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <unistd.h>
+
+int ft_atoi(char *str)
+{
+	int base;
+	int minus;
+
+	base = 0;
+	minus = 1;
+	while(*str != '\0' && (*str == ' ' || *str == '\t'))
+		*str++;
+	if(*str == '-')
+	{
+		minus = -1;
+		*str++;
+	}
+	if(*str == '+')
+		*str++;
+	while(*str != '\0' && (*str >= '0' && *str <= '9'))
+	{
+		base = base * 10 + *str - '0';
+		*str++;
+	}
+	return(base * (int)minus);
+}
+
+int main(int argc, char **argv)
+{
+	if(argc == 2)
+	{
+
+	}
+	write(1, "\n", 1);
+	return(0);
+}
