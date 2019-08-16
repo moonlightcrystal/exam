@@ -6,7 +6,7 @@
 /*   By: kcorie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 18:18:37 by kcorie            #+#    #+#             */
-/*   Updated: 2019/08/13 19:46:07 by kcorie           ###   ########.fr       */
+/*   Updated: 2019/08/16 18:40:43 by kcorie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,63 @@ int     *ft_rrange(int start, int end)
 {
 	int *array;
 	int i;
+	int size;
 
 	i = 0;
-
-	if(start > end)
-		return(NULL);
-	if(!(array = (int*)malloc(sizeof(int) * ((end - start) +  1))))
+	size = 0;
+	if(end < 0)
+		size = (end * -1) - start;
+	else if(end > start)
+		size = end - start;
+	else
+		size = start - end; 
+	if(!(array = (int*)malloc(sizeof(int) * (size + 1))))
 		 return(NULL);
-		 while(start <= end)
-			 array[i++] = start++;
+	if(end >= start)
+	{
+		 while(start < end)
+		 {
+			 array[i] = start++;
+			 i++;
+		 }
+		 array[i] = start;
+	}
+	else if(end < start)
+	{
+		while(start >= end)
+		{
+			array[i] = start--;
+			i++;
+		}
+	}
 		 return(array);
 }
 
 int main()
 {
-	int min = -5;
+	int min = -1;
 	int i = 0;
-	int max = 35;
+	int max = 2;
 	int *l;
 
 	l = ft_rrange(min, max);
-
-	while(max >= min)
+	if(max >= min)
 	{
-		printf("%d", l[i]);
-		max--;
-		i++;
+		while(max >= min)
+		{
+			printf("%d", l[i]);
+			max--;
+			i++;
+		}
+	}
+	else if(min < max)
+	{
+		while(min >= max)
+		{
+			printf("%d", l[i]);
+			min--;
+			i++;
+		}
 	}
 	return(0);
 }

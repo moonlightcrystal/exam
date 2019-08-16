@@ -1,45 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   max.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/01 18:07:30 by kcorie            #+#    #+#             */
-/*   Updated: 2019/08/14 19:15:07 by kcorie           ###   ########.fr       */
+/*   Created: 2019/08/14 16:33:56 by kcorie            #+#    #+#             */
+/*   Updated: 2019/08/14 16:48:05 by kcorie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdio.h>
 
-int		ft_atoi(const char *str)
+int	max(int* tab, unsigned int len)
 {
-	int minus;
-	int basic;
+	int max;
+	int i;
 
-	minus = 1;
-	basic = 0;
-	while(*str && (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\v' || *str == '\f' || *str == '\f'))
-		str++;
-	if(*str == '-')
+	max = 0;
+	i = 0;
+	if(!(tab))
+		return(0);
+	while(len)
 	{
-		minus = -1;
-		str++;
+		if(tab[i] > max)
+			max = tab[i];
+		i++;
+		len--;
 	}
-	if (*str == '+')
-		str++;
-	while(*str && *str >= '0' && *str <= '9')
-	{
-		basic = 10 * basic + *str - '0';
-		str++;
-	}
-	return(minus * basic);
+	return(max);
 }
 
 int main()
 {
-	char *dd = "  -12345";
-	printf("%d", ft_atoi(dd));
+	int arra[] = {17, 156, 777, 1, 1001};
+	printf("%d", max(arra, 5));
 	return(0);
 }
