@@ -1,66 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   itoa.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/16 20:45:26 by kcorie            #+#    #+#             */
-/*   Updated: 2019/08/17 16:59:15 by kcorie           ###   ########.fr       */
+/*   Created: 2019/08/17 16:19:53 by kcorie            #+#    #+#             */
+/*   Updated: 2019/08/17 17:08:37 by kcorie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-static int ft_count(int n)
+static int fcount(int n)
 {
-	int len;
+	int size;
 
-	len = 0;
+	size = 0;
 	if(n <= 0)
-		len += 1;
+		size += 1;
 	while(n)
 	{
-		len++;
-		n /= 10;
+		size++;
+		n = n / 10;
 	}
-	return(len);
+	return(size);
 }
 
-char	*ft_itoa(int nbr)
+char *ft_itoa(int nbr)
 {
+	int minus;
 	char *array;
 	int size;
-	int neg;
 
-	neg = 1;
-	size = ft_count(nbr);
+	minus = 1;
+	size = fcount(nbr);
 	if(!(array = (char *)malloc(sizeof(char) * (size + 1))))
 		return(NULL);
-	array[size]= '\0';
-	if(!array)
-		return(NULL);
+	array[size] = '\0';
+	if(nbr == 0)
+		array[0] = '0';
 	if(nbr < 0)
 	{
 		array[0] = '-';
-		neg *= -1;
+		minus *= -1;
 	}
-	if(nbr == 0)
-		array[0] = '0';
 	while(nbr != 0)
 	{
-		array[--size] = nbr % 10 * neg + '0';
-		nbr /= 10;
+		array[--size] = nbr % 10 * minus + '0';
+		nbr = nbr / 10;
 	}
 	return(array);
 }
 
 int main()
 {
-	int a = -15356365;
+	int a = -4356456;
 	printf("%s", ft_itoa(a));
 	return(0);
-
 }

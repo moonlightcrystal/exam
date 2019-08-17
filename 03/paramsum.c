@@ -1,40 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_swap.c                                          :+:      :+:    :+:   */
+/*   paramsum.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/01 17:00:01 by kcorie            #+#    #+#             */
-/*   Updated: 2019/08/17 20:50:12 by kcorie           ###   ########.fr       */
+/*   Created: 2019/08/17 19:22:35 by kcorie            #+#    #+#             */
+/*   Updated: 2019/08/17 19:40:21 by kcorie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_swap(int *a, int *b)
+void putnbr(int n)
 {
-	int c;
-//	int e;
+	char num;
 
-	c = *a; 
-/*// *c = *a; 
-//	c = &e; //с указывает на ардес е
-//	c = *a; //по указателю а достаю значение, записываю в с*/
-	*a = *b;
-	*b = c;
+	if(n > 9)
+		putnbr(n / 10);
+	num = n % 10 + '0';
+	write(1, &num, 1); 
 }
 
-#include <stdio.h> 
-int main(void)
+int main(int argc, char **argv)
 {
-	int x = 5; 
-	int y = 7;
-    
-	int *xptr = &x;
-	int *yptr = &y;
+	int i;
 
-	printf("%d %d\n", x, y);
-	ft_swap(&x, &y);
-	printf("%d %d", x, y);
+	i = 1;
+	if(argc != 1)
+	{
+		/*	i = 0;
+		while(argv[i + 1])
+		{
+			i++;
+			}*/
+		putnbr(argc - 1);
+	}
+	if(argc == 1)
+		write(1, "0", 1);
+	write(1, "\n", 1);
+	return(0);
 }
+

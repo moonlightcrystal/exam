@@ -1,57 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   jatoi.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/16 20:45:26 by kcorie            #+#    #+#             */
-/*   Updated: 2019/08/17 16:59:15 by kcorie           ###   ########.fr       */
+/*   Created: 2019/08/17 18:24:39 by kcorie            #+#    #+#             */
+/*   Updated: 2019/08/17 18:44:29 by kcorie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 static int ft_count(int n)
 {
-	int len;
+	int i;
 
-	len = 0;
+	i = 0;
 	if(n <= 0)
-		len += 1;
+		i += 1;
 	while(n)
 	{
-		len++;
-		n /= 10;
+		i++;
+		n = n / 10;
 	}
-	return(len);
+	return(i);
 }
-
 char	*ft_itoa(int nbr)
 {
+	int minus;
 	char *array;
 	int size;
-	int neg;
 
-	neg = 1;
+	minus = 1;
 	size = ft_count(nbr);
-	if(!(array = (char *)malloc(sizeof(char) * (size + 1))))
+	if(!(array = (char*)malloc(sizeof(char) * (size + 1))))
 		return(NULL);
-	array[size]= '\0';
-	if(!array)
-		return(NULL);
+	array[size] = '\0';
+	if(nbr == 0)
+		array[0] = '0';
 	if(nbr < 0)
 	{
 		array[0] = '-';
-		neg *= -1;
+		minus *= -1;
 	}
-	if(nbr == 0)
-		array[0] = '0';
 	while(nbr != 0)
 	{
-		array[--size] = nbr % 10 * neg + '0';
+		array[--size] = nbr % 10 * minus + '0';
 		nbr /= 10;
 	}
 	return(array);
@@ -59,8 +55,7 @@ char	*ft_itoa(int nbr)
 
 int main()
 {
-	int a = -15356365;
-	printf("%s", ft_itoa(a));
+	int nbr = -78945;
+	printf("%s", ft_itoa(nbr));
 	return(0);
-
 }
