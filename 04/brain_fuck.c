@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   brainfuck.c                                        :+:      :+:    :+:   */
+/*   brain_fuck.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/18 22:45:29 by kcorie            #+#    #+#             */
-/*   Updated: 2019/08/20 20:59:32 by kcorie           ###   ########.fr       */
+/*   Created: 2019/08/20 21:05:17 by kcorie            #+#    #+#             */
+/*   Updated: 2019/08/20 22:04:53 by kcorie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 
-int ft_skip(char *str)
+int skip(char *str)
 {
-	int i;
+	int size;
 	int open;
 
-	i = 0;
+	size = 0;
 	open = 1;
 	while(open)
 	{
@@ -27,34 +27,31 @@ int ft_skip(char *str)
 		else if(*str == ']')
 			open--;
 		str++;
-		i++;
+		size++;
 	}
-	return(i);
+	return(size);
 }
 
-void brainfuck(char *str, char *pointer)
+void brainfuck(char *str, char *ptr)
 {
-	int i;
-
-	i = 0;
 	while(*str)
-	{
+   	{
 		if(*str == '>')
-			pointer++;
+			ptr++;
 		else if(*str == '<')
-			pointer--;
+			ptr--;
 		else if(*str == '+')
-			(*pointer)++;
+			(*ptr)++;
 		else if(*str == '-')
-			(*pointer)--;
+			(*ptr)--;
 		else if(*str == '.')
-			write(1, pointer, 1);
+			write(1, ptr, 1);
 		else if(*str == '[')
-        {
-            while(*pointer)
-                brainfuck(str + 1, pointer);
-            str += ft_skip(str + 1);
-        }
+		{
+			while(*ptr != 0)
+				brainfuck(str + 1, ptr);
+			str += skip(str + 1);
+		}
 		else if(*str == ']')
 			return ;
 		str++;
@@ -69,5 +66,5 @@ int main(int argc, char **argv)
 		brainfuck(argv[1], &array[0]);
 	else
 		write(1, "\n", 1);
-	return (0);
+	return(0);
 }

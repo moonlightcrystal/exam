@@ -1,60 +1,66 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   itoabase.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcorie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/19 16:55:34 by kcorie            #+#    #+#             */
-/*   Updated: 2019/08/20 14:12:23 by kcorie           ###   ########.fr       */
+/*   Created: 2019/08/20 13:19:24 by kcorie            #+#    #+#             */
+/*   Updated: 2019/08/20 17:10:20 by kcorie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <stdlib.h>
 #include <stdio.h>
 
-int ft_count(int num, int base)
+int ft_count(int value, int base)
 {
-	int nub;
+	int size;
 
-	nub = 0;
-	if(num < 0 && base == 10)
-		nub = nub +  1;
-	while(num)
+	size = 0;
+	if(value < 0 && base == 10)
+		size++;
+	while(value)
 	{
-		nub++;
-		num = num / base;
+		size++;
+		value = value / base;
 	}
-	return(nub);
+	return(size);
 }
 
 char	*ft_itoa_base(int value, int base)
 {
-	char *array;
 	int size;
+	char *array;
 	char *hex = "0123456789ABCDEF";
+	long int number;
 
+	number = value;
+	if(base < 2 && base > 16)
+		return(NULL);
 	size = ft_count(value, base);
-	if(!(array = (char *)malloc(sizeof(char) * size + 1)))
-	   return(NULL);
+	if(!(array = (char*)malloc(sizeof(char) * size + 1)))
+		return(NULL);
 	array[size] = '\0';
-	if(value < 0 && base == 10)
+	if(number < 0 && base == 10)
 	{
 		array[0] = '-';
-		value *= -1;
+		number *= -1;
 	}
-	if(value < 0)
-		value *= -1;
-	while(value)
+	if(number < 0)
+		number *= -1;
+	while(number)
 	{
-		array[--size] = hex[value % base];
-		value /= base;
+		array[--size] = hex[number % base];
+		number /= base;
 	}
 	return(array);
 }
 
 int main()
 {
-	int v = 9;
-	printf("%s", ft_itoa_base(v, 4));
+	long int v = 2147483647;
+	char *str = ft_itoa_base(v, 8);
+	printf("%s", str);
 	return(0);
 }
