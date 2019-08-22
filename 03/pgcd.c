@@ -6,7 +6,7 @@
 /*   By: kcorie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 20:17:19 by kcorie            #+#    #+#             */
-/*   Updated: 2019/08/13 21:17:57 by kcorie           ###   ########.fr       */
+/*   Updated: 2019/08/21 22:49:03 by kcorie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,9 @@ int main(int argc, char **argv)
 		while(x != y)
 		{
 			if(x < y)
-			{
-				klm = x;
-				y = y - klm;
-			}
+				y -= x;
 			else
-			{
-				easy = y;
-				x = x - easy;
-			}
+				x -= y;
 		}
 		printf("%d\n", y);
 	}

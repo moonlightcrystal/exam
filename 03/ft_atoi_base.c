@@ -6,7 +6,7 @@
 /*   By: kcorie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/17 20:21:05 by kcorie            #+#    #+#             */
-/*   Updated: 2019/08/17 22:02:22 by kcorie           ###   ########.fr       */
+/*   Updated: 2019/08/22 11:25:45 by kcorie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ int	ft_atoi_base(const char *str, int str_base)
 
 int main()
 {
-	char *str1 = "7653";
-	int base = 4;
+	char *str1 = "0";
 
 	printf("%d", ft_atoi_base(str1, 8));
 	return(0);
